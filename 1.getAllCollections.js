@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 import { config } from "dotenv";
 
 config();
@@ -19,5 +19,5 @@ main()
   .catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect();
+  await mongoose.connect(process.env.MONGO_URL);
 }

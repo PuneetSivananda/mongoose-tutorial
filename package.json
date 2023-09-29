@@ -1,0 +1,17 @@
+{
+  "name": "mongod-tutorial",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "mongoose": "^7.5.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
