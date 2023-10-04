@@ -1,6 +1,6 @@
 import mongoose, { connect } from "mongoose";
 import { config } from "dotenv";
-import { createBlogPost } from "./dispatchers/create.js";
+import CreateBlogPost from "./dispatchers/create.js";
 
 config({ path: "../.env" });
 
@@ -13,7 +13,7 @@ connect(dbURI, {
   .then(async (result) => {
     console.log("Connected to db");
     // call the create command here
-    await createBlogPost();
+    await CreateBlogPost();
   })
   .then(() => {
     mongoose.connection.close();
