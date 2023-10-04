@@ -1,22 +1,45 @@
 import Blog from "../models/blog.js";
 import fs from "fs";
+import { config } from "dotenv";
+
+config({ path: "../../../.env" });
 
 const CreateBlogPost = async () => {
-  var dbList = fs.readFileSync(
-    "/Users/vn56bm8/Documents/mongod-tutorial/1.Tutorial/data/dummy.json",
-    "utf-8"
-  );
-  var listItems = JSON.parse(dbList);
+  try {
+    var dbList = fs.readFileSync(process.env.JSON_FILE_PATH, "utf-8");
+    var listItems = JSON.parse(dbList);
+    const results = listItems.map((element) => {
+      return new Blog({
+        title: element.title,
+        snippet: element.snippet,
+        body: element.body,
+      });
+    });
 
-  console.log(listItems);
-  console.log(listItems[2]);
-
-  return await Blog.create({
-    title: "Sunt laboris ex elit laboris velit est occaecat mollit ipsum.",
-    snippet:
-      "Culpa culpa commodo quis aute dolore nisi. Reprehenderit ut et ullamco dolor quis nostrud consectetur non officia qui nostrud anim nostrud.",
-    body: "Aliqua adipisicing ipsum tempor laborum anim laborum magna irure laboris adipisicing. Cupidatat esse proident magna laborum laboris cupidatat aliqua do excepteur aliquip qui ex. Minim laborum nulla sint amet in minim amet duis.\r\nCillum laborum cupidatat ex consectetur. Pariatur do quis sint sunt et aliquip incididunt cillum excepteur Lorem mollit in quis consequat. Excepteur fugiat magna culpa cupidatat enim qui duis labore dolore commodo consequat. Labore Lorem mollit qui veniam dolore ex qui magna. Eu excepteur voluptate proident ut proident dolore do est. Mollit aliqua officia aliquip anim adipisicing commodo occaecat aliquip ullamco est commodo. Laboris cillum culpa nisi Lorem quis adipisicing qui eu tempor cillum.\r\n",
-  });
+    var bulkOps = [];
+    // [populate gasStation as needed]
+    // Each document should look like this: (note the 'upsert': true)
+    results.forEach((element) => {
+      let upsertDoc = {
+        insertOne: {
+          document: element,
+        },
+      };
+      bulkOps.push(upsertDoc);
+    });
+    console.log(bulkOps);
+    Blog.bulkWrite(bulkOps)
+      .then((bulkWriteOpResult) => {
+        console.log("BULK update OK");
+        console.log(JSON.stringify(bulkWriteOpResult, null, 2));
+      })
+      .catch((err) => {
+        console.log("BULK update error");
+        console.log(JSON.stringify(err, null, 2));
+      });
+  } catch (err) {
+    console.error("Error reading the database");
+  }
 };
 
 export default CreateBlogPost;

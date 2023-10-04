@@ -14,8 +14,11 @@ connect(dbURI, {
     console.log("Connected to db");
     // call the create command here
     // seed Data
-    await CreateBlogPost();
+    const seedData = await CreateBlogPost();
     console.log("Querying the data");
+    // Query Data and display the results in console.
+    // Edit a document, display before and after
+    // Delete a document based on the id
   })
   .then(() => {
     mongoose.connection.close();
