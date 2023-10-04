@@ -1,6 +1,7 @@
 import Blog from "../models/blog.js";
-
+import * as data from "../data/dummy.json";
 const CreateBlogPost = async () => {
+  console.log(data);
   return await Blog.create({
     title: "Sunt laboris ex elit laboris velit est occaecat mollit ipsum.",
     snippet:
