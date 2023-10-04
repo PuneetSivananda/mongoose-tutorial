@@ -9,32 +9,20 @@ const CreateBlogPost = async () => {
     var dbList = fs.readFileSync(process.env.JSON_FILE_PATH, "utf-8");
     var listItems = JSON.parse(dbList);
     const results = listItems.map((element) => {
-      return new Blog({
+      return {
         title: element.title,
         snippet: element.snippet,
         body: element.body,
-      });
+      };
     });
 
-    var bulkOps = [];
-    // [populate gasStation as needed]
-    // Each document should look like this: (note the 'upsert': true)
-    results.forEach((element) => {
-      let upsertDoc = {
-        insertOne: {
-          document: element,
-        },
-      };
-      bulkOps.push(upsertDoc);
-    });
-    console.log(bulkOps);
-    Blog.bulkWrite(bulkOps)
-      .then((bulkWriteOpResult) => {
-        console.log("BULK update OK");
-        console.log(JSON.stringify(bulkWriteOpResult, null, 2));
+    return await Blog.insertMany(results)
+      .then((insertManyOpResult) => {
+        console.log("BULK insert OK");
+        console.log(JSON.stringify(insertManyOpResult, null, 2));
       })
       .catch((err) => {
-        console.log("BULK update error");
+        console.log("BULK insert error");
         console.log(JSON.stringify(err, null, 2));
       });
   } catch (err) {
