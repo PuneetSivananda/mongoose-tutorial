@@ -1,7 +1,16 @@
 import Blog from "../models/blog.js";
-import * as data from "../data/dummy.json";
+import fs from "fs";
+
 const CreateBlogPost = async () => {
-  console.log(data);
+  var dbList = fs.readFileSync(
+    "/Users/vn56bm8/Documents/mongod-tutorial/1.Tutorial/data/dummy.json",
+    "utf-8"
+  );
+  var listItems = JSON.parse(dbList);
+
+  console.log(listItems);
+  console.log(listItems[2]);
+
   return await Blog.create({
     title: "Sunt laboris ex elit laboris velit est occaecat mollit ipsum.",
     snippet:
