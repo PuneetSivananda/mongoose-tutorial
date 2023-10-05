@@ -1,6 +1,6 @@
 import mongoose, { connect } from "mongoose";
 import { config } from "dotenv";
-import CreateBlogPost from "./dispatchers/index.js";
+import { CreateBlogPost, DeleteAllBlogPosts } from "./dispatchers/index.js";
 
 config({ path: "../.env" });
 
@@ -14,11 +14,16 @@ connect(dbURI, {
     console.log("Connected to db");
     // call the create command here
     // seed Data
+    console.log("Creating Database and seeding data...");
     await CreateBlogPost();
-    console.log("Querying the data");
+    console.log("Create DB completed...");
     // Query Data and display the results in console.
     // Edit a document, display before and after
     // Delete a document based on the id
+    // Delete all records in the db
+    console.log("Deleting all the records in the database...");
+    await DeleteAllBlogPosts();
+    console.log("Deletion Successfull");
   })
   .then(() => {
     mongoose.connection.close();
