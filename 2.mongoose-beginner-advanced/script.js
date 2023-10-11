@@ -25,10 +25,20 @@ run().then(() => {
   }, 2000);
 });
 async function run() {
-  const user = new User({
-    name: "Puneet",
-    age: 30,
+  // Create User
+  const createdUser = await User.create({
+    name: "Kyle",
+    age: 31,
   });
-  await user.save().then(() => console.log("User Saved"));
-  console.log(user);
+  //   const user = new User({
+  //     name: "Puneet",
+  //     age: 30,
+  //   });
+  //   await user.save().then(() => console.log("User Saved"));
+
+  //   Update User
+  createdUser.name = "Penelope";
+  await createdUser.save();
+
+  console.log(createdUser);
 }
