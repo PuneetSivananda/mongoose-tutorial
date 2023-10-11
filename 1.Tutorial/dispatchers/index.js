@@ -31,16 +31,30 @@ export const CreateBlogPost = async () => {
 };
 
 // Return a single blog find by the id
-
-export const GetBlogById = async (blogId) => {
+export const GetBlogById = async () => {
   try {
-    return await Blog.findById(blogId)
+    return await Blog.findOne()
       .then((blog) => blog)
       .catch((err) => {
         console.err(err);
       });
   } catch (err) {
     console.err(`Error Retrieving the Blog by id: ${blogId}`);
+  }
+};
+
+// Edit a Blog title based on the id given
+export const EditBlogById = async ({ blogId, text }) => {
+  try {
+    return await Blog.findOneAndUpdate(
+      { _id: blogId }, // filter
+      { title: text }, // update the document
+      {
+        new: true, // returns the updated Value
+      }
+    );
+  } catch (err) {
+    console.error(`Eroor editing the blog by id: ${blogId}`);
   }
 };
 
