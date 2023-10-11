@@ -30,6 +30,20 @@ export const CreateBlogPost = async () => {
   }
 };
 
+// Return a single blog find by the id
+
+export const GetBlogById = async (blogId) => {
+  try {
+    return await Blog.findById(blogId)
+      .then((blog) => blog)
+      .catch((err) => {
+        console.err(err);
+      });
+  } catch (err) {
+    console.err(`Error Retrieving the Blog by id: ${blogId}`);
+  }
+};
+
 export const DeleteAllBlogPosts = async () => {
   try {
     return await Blog.deleteMany({})
