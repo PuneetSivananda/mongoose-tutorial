@@ -33,6 +33,7 @@ async function run() {
     address: {
       street: "Main St.",
     },
+    email: "sample@user.com",
   });
 
   console.log(user);
