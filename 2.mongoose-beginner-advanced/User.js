@@ -51,4 +51,8 @@ userSchema.query.byName = function (name) {
   return this.where({ name: new RegExp(name, "i") });
 };
 
+userSchema.virtual("namedEmail").get(function () {
+  return `${this.name} <${this.email}>`;
+});
+
 export const User = model("User", userSchema);

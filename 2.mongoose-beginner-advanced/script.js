@@ -119,4 +119,10 @@ async function run() {
   );
   const user1 = await User.where().byName("kyle");
   console.log(user1);
+
+  console.log(
+    "============Custom Hooks for virtual, customnames ===================="
+  );
+  const customEmail = await User.findOne({ name: "Kyle" });
+  console.log(customEmail.namedEmail);
 }
