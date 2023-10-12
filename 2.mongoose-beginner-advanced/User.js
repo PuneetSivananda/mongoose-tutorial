@@ -31,7 +31,10 @@ const userSchema = new Schema({
     type: Date,
     default: () => Date.now(),
   },
-  bestFriend: SchemaTypes.ObjectId,
+  bestFriend: {
+    type: SchemaTypes.ObjectId,
+    ref: "User",
+  },
   hobbies: [String],
   address: addresSchema,
 });
