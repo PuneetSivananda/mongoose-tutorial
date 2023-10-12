@@ -113,4 +113,10 @@ async function run() {
   console.log("============Custom Hooks for own queries====================");
   const user_by_name = await User.findByName("kyle");
   console.log(user_by_name);
+
+  console.log(
+    "============Custom Hooks for own queries, custom query level===================="
+  );
+  const user1 = await User.where().byName("kyle");
+  console.log(user1);
 }
