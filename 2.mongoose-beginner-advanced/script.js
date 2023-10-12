@@ -9,26 +9,27 @@ console.log(dbURI);
 
 connect(dbURI, {
   useNewUrlParser: true,
-})
-  .then(async (result) => {
-    console.log("Connected to db");
+}).then(async () => {
+  console.log("Connected to db");
+});
+
+run()
+  .then(() => {
+    mongoose.connection.close();
+    console.log("Disconnecting");
+    setTimeout(() => {
+      process.exit();
+    }, 2000);
   })
   .catch((err) => {
-    console.error(err);
+    console.err(err);
+    mongoose.connection.close();
   });
-
-run().then(() => {
-  mongoose.connection.close();
-  console.log("Disconnecting");
-  setTimeout(() => {
-    process.exit();
-  }, 2000);
-});
 async function run() {
   // Create User
   const user = await User.create({
     name: "Kyle",
-    age: 31,
+    age: 30,
     hobbies: ["WeightLifting", "Bowling"],
     address: {
       street: "Main St.",
