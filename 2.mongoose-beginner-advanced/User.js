@@ -39,4 +39,8 @@ const userSchema = new Schema({
   address: addresSchema,
 });
 
+userSchema.methods.sayHi = function () {
+  console.log(`Hi, My name is ${this.name}`);
+};
+
 export const User = model("User", userSchema);

@@ -105,4 +105,8 @@ async function run() {
     .limit(1);
   console.log("================populate best friend ====================");
   console.log(getKyle);
+
+  console.log("============Custom Hooks for the model====================");
+  const userSpeak = await User.findOne({ name: "Kyle" });
+  userSpeak.sayHi();
 }
