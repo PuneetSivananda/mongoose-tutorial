@@ -92,10 +92,10 @@ async function run() {
   console.log(usersEquals10);
 
   // add Best Friend to Kyle
-  console.log("================best friend ===========================");
-  kyle[0].bestFriend = "65279ff3cb1f969365b1ff27";
-  await kyle[0].save();
-  console.log(kyle);
+  // console.log("================best friend ===========================");
+  // kyle[0].bestFriend = "65279ff3cb1f969365b1ff27";
+  // await kyle[0].save();
+  // console.log(kyle);
 
   const getKyle = await User.where("name")
     .equals("Kyle")
@@ -124,5 +124,11 @@ async function run() {
     "============Custom Hooks for virtual, customnames ===================="
   );
   const customEmail = await User.findOne({ name: "Kyle" });
+  console.log(customEmail);
   console.log(customEmail.namedEmail);
+
+  // Middlewares in mongoose
+  // every time we save the updated time is changed to current time
+  await customEmail.save();
+  console.log(customEmail);
 }
