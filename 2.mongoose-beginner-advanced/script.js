@@ -28,21 +28,19 @@ run()
 
 async function run() {
   // Create User
-  /**
-    const user = await User.create({
-    name: "Kyle",
-    age: 30,
-    hobbies: ["WeightLifting", "Bowling"],
-    address: {
-      street: "Main St.",
-    },
-    email: "sample@user.com",
-  });
-  **/
 
+  // const user = await User.create({
+  //   name: "Kyle",
+  //   age: 30,
+  //   hobbies: ["WeightLifting", "Bowling"],
+  //   address: {
+  //     street: "Main St.",
+  //   },
+  //   email: "sample@user.com",
+  // });
   // find user by id
-  const user = await User.findById("6527881c84171fb29cb9ad1f");
-  console.log(user);
+  // const user = await User.findById("6527881c84171fb29cb9ad1f");
+  // console.log(user);
 
   // find all users that match
   const kyle = await User.find({ name: "Kyle" });
@@ -57,6 +55,29 @@ async function run() {
   console.log(oneUser);
 
   // delete one user
-  const deletedUser = await User.deleteOne({ name: "Kyle" });
-  console.log(deletedUser);
+  // const deletedUser = await User.deleteOne({ name: "Kyle" });
+  // console.log(deletedUser);
+
+  // mongoose queries
+  const whereUser = await User.where("name").equals("Kyle");
+  console.log("====================where query======================");
+  console.log(whereUser);
+
+  const ageGt12 = await User.where("age").gt("12");
+  console.log("====================where age > 12====================");
+  console.log(ageGt12);
+
+  const ageGt12NameKyle = await User.where("age")
+    .gt(12)
+    .where("name")
+    .equals("Kyle");
+  console.log("===const==========where age > 12 and name = kyle============");
+  console.log(ageGt12NameKyle);
+
+  const ageLt12NameKyle = await User.where("age")
+    .lt(12)
+    .where("name")
+    .equals("Kyle");
+  console.log("===const==========where age < 12 and name = kyle============");
+  console.log(ageLt12NameKyle);
 }
