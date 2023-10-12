@@ -109,4 +109,8 @@ async function run() {
   console.log("============Custom Hooks for the model====================");
   const userSpeak = await User.findOne({ name: "Kyle" });
   userSpeak.sayHi();
+
+  console.log("============Custom Hooks for own queries====================");
+  const user_by_name = await User.findByName("kyle");
+  console.log(user_by_name);
 }
