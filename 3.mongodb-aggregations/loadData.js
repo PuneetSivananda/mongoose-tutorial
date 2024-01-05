@@ -1,9 +1,8 @@
 import fs from "fs";
 import mongoose from "mongoose";
-import Person, { personSchema } from "./schema/Persons.js";
+import { personSchema } from "./schema/Persons.js";
 
 const uri = "mongodb://localhost:27017/mydb";
-let dbName = "mydb";
 let collectionName = "persons";
 let dataPath = `./data/Persons.json`;
 
@@ -18,7 +17,6 @@ mongoose
       const jsonData = fs.readFileSync(dataPath, "utf8");
       const parsedData = JSON.parse(jsonData);
 
-      // Insert parsed data into MongoDB
       await PersonModel.insertMany(parsedData);
 
       console.log("Data inserted into MongoDB");
