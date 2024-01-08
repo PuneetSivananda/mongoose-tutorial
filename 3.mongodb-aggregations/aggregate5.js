@@ -15,12 +15,14 @@ console.log("=============Results=start===============");
 
 const results = db.persons.aggregate([
   // Stage 1
+  { $match: { gender: "female" } },
+  // Stage 2
   {
     $group: {
       _id: {
         age: "$age",
         eyeColor: "$eyeColor",
-        favoriteFruit: "$favoriteFruit",
+        gender: "$gender",
       },
     },
   },
