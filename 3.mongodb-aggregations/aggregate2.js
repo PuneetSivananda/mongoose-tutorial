@@ -1,6 +1,6 @@
 /**
  * Aggregation Stages
- * -  match
+ * -  match *
  * -  group
  * -  project
  * -  sort
