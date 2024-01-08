@@ -16,9 +16,20 @@ console.log("=============Results=start===============");
 
 const results = db.persons.aggregate([
   // Stage 1
-  { $group: { _id: "$age" } },
+  { $group: { _id: "$eyeColor" } },
 ]);
 
 console.log(results);
 
 console.log("=============Results=End=================");
+
+console.log("=============countryResults=start===============");
+
+const countryResults = db.persons.aggregate([
+  // Stage 1
+  { $group: { _id: "$company.location.country" } },
+]);
+
+console.log(countryResults);
+
+console.log("=============countryResults=End=================");
