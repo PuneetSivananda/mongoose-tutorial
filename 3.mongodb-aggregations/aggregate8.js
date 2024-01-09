@@ -1,7 +1,7 @@
 /**
  * Aggregation Stages
  * -  match
- * -  group
+ * -  group *
  * -  project
  * -  sort
  * -  count *
@@ -10,19 +10,18 @@
  * -  out
  */
 
-// Count Stage
+// Group and Count Stage
 console.log("=============Results=start===============");
 
-const results = db.persons.aggregate([]).toArray(); //slowest
-const results1 = db.persons.aggregate([]).itcount();
-const results2 = db.persons.aggregate([
+const results = db.persons.aggregate([
+  //Stage 1
+  { $group: { _id: "$company.location.country" } },
+  //Stage 2
   {
-    $count: "total",
+    $count: "countriesCount",
   },
-]); //fastest
+]);
 
-console.log(results.length);
-console.log(results1);
-console.log(results2);
+console.log(results);
 
 console.log("=============Results=End=================");
