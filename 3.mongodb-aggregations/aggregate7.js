@@ -13,11 +13,10 @@
 // Count Stage
 console.log("=============Results=start===============");
 
-const results = db.persons.aggregate([
-  // Stage 1
-  { $count: "allDocumentsCount" },
-]);
+const results = db.persons.aggregate([]).toArray();
+const results1 = db.persons.aggregate([]).itcount();
 
-console.log(results);
+console.log(results.length);
+console.log(results1);
 
 console.log("=============Results=End=================");
