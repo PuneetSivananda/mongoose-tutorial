@@ -16,11 +16,19 @@ console.log("=============Results=start===============");
 const results = db.persons.aggregate([
   //Stage 1
   {
-    $group: { _id: "$favoriteFruit" },
+    $group: {
+      _id: {
+        eyeColor: "$eyeColor",
+        favoriteFruit: "$favoriteFruit",
+      },
+    },
   },
   //Stage 2
   {
-    $sort: { _id: 1 },
+    $sort: {
+      "_id.eyeColor": 1,
+      "_id.favoriteFruit": -1,
+    },
   },
 ]);
 
