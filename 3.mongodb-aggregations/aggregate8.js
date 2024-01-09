@@ -15,10 +15,12 @@ console.log("=============Results=start===============");
 
 const results = db.persons.aggregate([
   //Stage 1
-  { $group: { _id: { eyeColor: "$eyeColor", gender: "$gender" } } },
+  { $match: { age: { $gte: 25 } } },
   //Stage 2
+  { $group: { _id: { eyeColor: "$eyeColor", age: "$age" } } },
+  //Stage 3
   {
-    $count: "eyeColorAndGender",
+    $count: "eyeColorAndAge",
   },
 ]);
 
