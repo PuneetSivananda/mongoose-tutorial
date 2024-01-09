@@ -1,7 +1,7 @@
 /**
  * Aggregation Stages
  * -  match
- * -  group
+ * -  group *
  * -  project
  * -  sort *
  * -  count
@@ -16,7 +16,11 @@ console.log("=============Results=start===============");
 const results = db.persons.aggregate([
   //Stage 1
   {
-    $sort: { name: 1 },
+    $group: { _id: "$favoriteFruit" },
+  },
+  //Stage 2
+  {
+    $sort: { _id: 1 },
   },
 ]);
 
