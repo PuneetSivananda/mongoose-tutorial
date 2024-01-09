@@ -1,26 +1,22 @@
 /**
  * Aggregation Stages
  * -  match
- * -  group *
+ * -  group
  * -  project
- * -  sort
- * -  count *
+ * -  sort *
+ * -  count
  * -  limit
  * -  skip
  * -  out
  */
 
-// Group and Count Stage
+// Sort Stage
 console.log("=============Results=start===============");
 
 const results = db.persons.aggregate([
   //Stage 1
-  { $match: { age: { $gte: 25 } } },
-  //Stage 2
-  { $group: { _id: { eyeColor: "$eyeColor", age: "$age" } } },
-  //Stage 3
   {
-    $count: "eyeColorAndAge",
+    $sort: { name: 1 },
   },
 ]);
 
