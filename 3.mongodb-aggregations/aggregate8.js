@@ -15,10 +15,10 @@ console.log("=============Results=start===============");
 
 const results = db.persons.aggregate([
   //Stage 1
-  { $group: { _id: "$company.location.country" } },
+  { $group: { _id: { eyeColor: "$eyeColor", gender: "$gender" } } },
   //Stage 2
   {
-    $count: "countriesCount",
+    $count: "eyeColorAndGender",
   },
 ]);
 
