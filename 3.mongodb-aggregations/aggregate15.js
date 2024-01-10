@@ -8,17 +8,20 @@
  * -  limit
  * -  skip
  * -  out
- * -  unwind
- * -  sum *
+ * -  unwind *
+ * -  sum
  */
 
-// Accumulators Stage
+// Accumulators - (group, unwind) Stage
 console.log("=============Results=start===============");
 
 const results = db.persons.aggregate([
   {
+    $unwind: "$tags",
+  },
+  {
     $group: {
-      _id: "$favoriteFruit",
+      _id: "$tags",
       count: { $sum: 1 },
     },
   },
