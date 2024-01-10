@@ -1,26 +1,25 @@
 /**
  * Aggregation Stages
  * -  match
- * -  group *
+ * -  group
  * -  project
  * -  sort
  * -  count
  * -  limit
  * -  skip
  * -  out
+ * -  unwind *
  */
 
-// Group Stage
+// Unwind Stage
 console.log("=============Results=start===============");
 
 // works on arrays
 const results = db.persons.aggregate([
   { $unwind: "$tags" },
   {
-    $project: {
-      name: 1,
-      index: 1,
-      tags: 1,
+    $group: {
+      _id: "$tags",
     },
   },
 ]);
