@@ -18,7 +18,7 @@ console.log("=============Results=start===============");
 const results = db.persons.aggregate([
   {
     $group: {
-      _id: "$age",
+      _id: "$favoriteFruit",
       count: { $sum: 1 },
     },
   },
