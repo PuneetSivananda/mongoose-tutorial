@@ -9,7 +9,7 @@
  * -  skip
  * -  out
  * -  unwind *
- * -  sum
+ * -  sum *
  */
 
 // Accumulators - (group, unwind) Stage
@@ -22,7 +22,7 @@ const results = db.persons.aggregate([
   {
     $group: {
       _id: "$tags",
-      count: { $sum: 1 },
+      count: { $sum: NumberInt(1) },
     },
   },
 ]);
