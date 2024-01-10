@@ -1,9 +1,9 @@
 /**
  * Aggregation Stages
- * -  match *
- * -  group *
- * -  project
- * -  sort *
+ * -  match
+ * -  group
+ * -  project *
+ * -  sort
  * -  count
  * -  limit
  * -  skip
@@ -16,23 +16,17 @@ console.log("=============Results=start===============");
 const results = db.persons.aggregate([
   //Stage 1
   {
-    $match: { eyeColor: { $ne: "blue" } },
+    $project: {
+      _id: 0,
+      isActive: 1,
+      gender: 1,
+      name: 1,
+      "company.location.country": 1,
+    },
   },
   //Stage 2
   {
-    $group: {
-      _id: {
-        eyeColor: "$eyeColor",
-        favoriteFruit: "$favoriteFruit",
-      },
-    },
-  },
-  //Stage 3
-  {
-    $sort: {
-      "_id.eyeColor": 1,
-      "_id.favoriteFruit": -1,
-    },
+    $limit: 5,
   },
 ]);
 
