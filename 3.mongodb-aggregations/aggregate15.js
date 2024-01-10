@@ -15,7 +15,8 @@
 // Accumulators - (group, unwind) Stage
 console.log("=============Results=start===============");
 
-const results = db.persons.aggregate([
+/**
+ * const results = db.persons.aggregate([
   {
     $unwind: "$tags",
   },
@@ -23,6 +24,17 @@ const results = db.persons.aggregate([
     $group: {
       _id: "$tags",
       count: { $sum: NumberInt(1) },
+    },
+  },
+]);
+*/
+
+// Accumulators - (group, avg) Stage
+const results = db.persons.aggregate([
+  {
+    $group: {
+      _id: "$eyeColor",
+      avgAge: { $avg: "$age" },
     },
   },
 ]);
