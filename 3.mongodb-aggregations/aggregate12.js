@@ -10,7 +10,7 @@
  * -  out
  */
 
-// Sort Stage
+// Project Stage
 console.log("=============Results=start===============");
 
 const results = db.persons.aggregate([
@@ -18,10 +18,13 @@ const results = db.persons.aggregate([
   {
     $project: {
       _id: 0,
-      isActive: 1,
-      gender: 1,
+      index: 1,
       name: 1,
-      "company.location.country": 1,
+      info:{
+        eyes: "$eyeColor",
+        company: "$company.title",
+        country: "$company.location.country"
+      }
     },
   },
   //Stage 2
