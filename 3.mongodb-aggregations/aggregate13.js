@@ -19,7 +19,7 @@ const results = db.persons.aggregate([
   {
     $project: {
       name: 1,
-      gender: 1,
+      index: 1,
       tags: 1,
     },
   },
