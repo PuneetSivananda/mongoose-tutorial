@@ -29,10 +29,21 @@ console.log("=============Results=start===============");
 ]);
 */
 
-// Accumulators - (group, avg) Stage
+// Accumulators - (group) Stage
+// const results = db.persons.aggregate([
+//   {
+//     $group: {
+//       _id: "$company.location.country",
+//       avgAge: { $avg: "$age" },
+//     },
+//   },
+// ]);
+
+// Unary Operators - (type, or, lt, gt, and, multiply) Stage
+// works on each document, works in project stage
 const results = db.persons.aggregate([
   {
-    $group: {
+    $project: {
       _id: "$company.location.country",
       avgAge: { $avg: "$age" },
     },
