@@ -44,8 +44,9 @@ console.log("=============Results=start===============");
 const results = db.persons.aggregate([
   {
     $project: {
-      _id: "$company.location.country",
-      avgAge: { $avg: "$age" },
+      name: 1,
+      eyeColorType: { $type: "$eyeColor" },
+      ageType: { $type: "$age" },
     },
   },
 ]);
