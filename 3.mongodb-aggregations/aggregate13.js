@@ -2,7 +2,7 @@
  * Aggregation Stages
  * -  match
  * -  group *
- * -  project 
+ * -  project
  * -  sort
  * -  count
  * -  limit
@@ -13,23 +13,13 @@
 // Group Stage
 console.log("=============Results=start===============");
 
+// works on arrays
 const results = db.persons.aggregate([
-  //Stage 1
+  { $unwind: "$tags" },
   {
-    $project: {
-      _id: 0,
-      index: 1,
-      name: 1,
-      info:{
-        eyes: "$eyeColor",
-        company: "$company.title",
-        country: "$company.location.country"
-      }
+    $group: {
+      _id: "$tags",
     },
-  },
-  //Stage 2
-  {
-    $limit: 5,
   },
 ]);
 
