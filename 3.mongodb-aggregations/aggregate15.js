@@ -45,6 +45,8 @@ const results = db.persons.aggregate([
   {
     $project: {
       name: 1,
+      nameType: { $type: "$name" },
+      tagsType: { $type: "$tags" },
       eyeColorType: { $type: "$eyeColor" },
       ageType: { $type: "$age" },
     },
