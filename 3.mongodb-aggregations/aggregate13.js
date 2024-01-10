@@ -17,8 +17,10 @@ console.log("=============Results=start===============");
 const results = db.persons.aggregate([
   { $unwind: "$tags" },
   {
-    $group: {
-      _id: "$tags",
+    $project: {
+      name: 1,
+      gender: 1,
+      tags: 1,
     },
   },
 ]);
