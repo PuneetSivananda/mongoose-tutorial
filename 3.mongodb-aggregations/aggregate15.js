@@ -41,17 +41,58 @@ console.log("=============Results=start===============");
 
 // Unary Operators - (type, or, lt, gt, and, multiply) Stage
 // works on each document, works in project stage
-const results = db.persons.aggregate([
-  {
-    $project: {
-      name: 1,
-      nameType: { $type: "$name" },
-      tagsType: { $type: "$tags" },
-      eyeColorType: { $type: "$eyeColor" },
-      ageType: { $type: "$age" },
+// const results = db.persons.aggregate([
+//   {
+//     $project: {
+//       name: 1,
+//       nameType: { $type: "$name" },
+//       tagsType: { $type: "$tags" },
+//       eyeColorType: { $type: "$eyeColor" },
+//       ageType: { $type: "$age" },
+//     },
+//   },
+// ]);
+
+// console.log(results);
+
+// Out Operators  Stage
+
+// const results = db.persons.aggregate([
+//   {
+//     $project: {
+//       name: 1,
+//       nameType: { $type: "$name" },
+//       tagsType: { $type: "$tags" },
+//       eyeColorType: { $type: "$eyeColor" },
+//       ageType: { $type: "$age" },
+//     },
+//   },
+//   {
+//     $out: "outCollection",
+//   },
+// ]);
+
+// console.log(results);
+
+// allowDiskUse operation
+
+const results = db.persons.aggregate(
+  [
+    {
+      $project: {
+        name: 1,
+        nameType: { $type: "$name" },
+        tagsType: { $type: "$tags" },
+        eyeColorType: { $type: "$eyeColor" },
+        ageType: { $type: "$age" },
+      },
     },
-  },
-]);
+    {
+      $out: "outCollection",
+    },
+  ],
+  { allowDiskUse: true }
+);
 
 console.log(results);
 
