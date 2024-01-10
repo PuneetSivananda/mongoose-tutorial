@@ -33,7 +33,7 @@ console.log("=============Results=start===============");
 const results = db.persons.aggregate([
   {
     $group: {
-      _id: "$eyeColor",
+      _id: "$company.location.country",
       avgAge: { $avg: "$age" },
     },
   },
