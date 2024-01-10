@@ -1,24 +1,36 @@
 /**
  * Aggregation Stages
  * -  match
- * -  group
+ * -  group *
  * -  project
  * -  sort
  * -  count
  * -  limit
  * -  skip
  * -  out
- * -  unwind *
+ * -  unwind
+ * -  sum *
  */
 
 // Accumulators Stage
 console.log("=============Results=start===============");
 
 const results = db.persons.aggregate([
-  { $unwind: "$tags" },
+  {
+    $project: {
+      _id: 0,
+      index: 1,
+      name: 1,
+      info: {
+        eyeColor: "$eyeColor",
+        company: "$company.title",
+        country: "$company.location.country",
+      },
+    },
+  },
   {
     $group: {
-      _id: "$tags",
+      _id: "$info.eyeColor",
     },
   },
 ]);
