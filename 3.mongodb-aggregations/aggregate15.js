@@ -91,7 +91,7 @@ const results = db.persons.aggregate(
       $out: "outCollection",
     },
   ],
-  { allowDiskUse: true }
+  { allowDiskUse: true } // does not load data in memory, uses disk
 );
 
 console.log(results);
